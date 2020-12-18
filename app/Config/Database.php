@@ -30,25 +30,25 @@ class Database extends \CodeIgniter\Database\Config
 	 * @var array
 	 */
 	public $default = [
-		'DSN'      => '',
+		'DSN'      => 'pgsql:host=localhost;port=5432;dbname=desafio-om30;user=postgres;password=postgres',
 		'hostname' => 'localhost',
-		'username' => '',
-		'password' => '',
-		'database' => '',
-		'DBDriver' => 'MySQLi',
+		'username' => 'postgres',
+		'password' => 'postgres',
+		'database' => 'desafio-om30',
+		'DBDriver' => 'Postgre',
 		'DBPrefix' => '',
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),
 		'cacheOn'  => false,
 		'cacheDir' => '',
 		'charset'  => 'utf8',
-		'DBCollat' => 'utf8_general_ci',
 		'swapPre'  => '',
+		'schema'  => 'public',
 		'encrypt'  => false,
 		'compress' => false,
 		'strictOn' => false,
 		'failover' => [],
-		'port'     => 3306,
+		'port'     => 5432,
 	];
 
 	/**
