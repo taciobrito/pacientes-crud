@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\HTTP\IncomingRequest;
 
 class Pacientes extends ResourceController
 {
@@ -13,17 +14,22 @@ class Pacientes extends ResourceController
 
 	public function index()
 	{
-		$pacientes = $this->model->paginate(15);
-		$paginacao = $this->model->pager;
-		$paginacao->{'data'} = $pacientes;
+		$pacientes = $this->model->findAll();
 
-		return $this->respond($paginacao);
+		foreach ($pacientes as $paciente) {
+			$paciente->data_nascimento = date_create_from_format('Y-m-d', $paciente->data_nascimento)->format('d/m/Y');
+		}
+
+		return $this->respond($pacientes);
 	}
 
 	public function create()
 	{
 		try {
-			$dados = $this->getBodyData();
+			$dados = $this->getDadosDaRequisicao();
+
+			unset($dados->{'id'});
+			unset($dados->{'foto'});
 
 			if (!$paciente_id = $this->model->insert($dados)) {
 				throw new \Exception('Desculpe, não foi possível salvar os dados.', 1);
@@ -58,7 +64,7 @@ class Pacientes extends ResourceController
 		}
 
 		try {
-			$dados = $this->getBodyData();
+			$dados = $this->getDadosDaRequisicao();
 			$dados->{'id'} = $id;
 
 			if (!$this->model->update($id, $dados)) {
@@ -92,7 +98,7 @@ class Pacientes extends ResourceController
 		return $this->model->find($id);
 	}
 
-	private function getBodyData() {
+	private function getDadosDaRequisicao() {
 		$dados = json_decode($this->request->getBody());
 
 		if (!empty($dados->data_nascimento)) {

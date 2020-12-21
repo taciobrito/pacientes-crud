@@ -1,64 +1,29 @@
-# CodeIgniter 4 Application Starter
+# Aplicação em CodeIgniter 4
 
-## What is CodeIgniter?
+## Passos da criação do projeto
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible, and secure. 
-More information can be found at the [official site](http://codeigniter.com).
+- A Criação do projeto foi realizada via composer usando a versão 4 do Codeigniter;
+- Foi realizada a Configuração da conexão com o banco de dados Postgre;
+- Criação da migration da tabela de pacientes;
+- Criação dos endpoints de pacientes;
+- Uso do postman para testar as requisições;
+- Desenvolvimento do front utilizando bootstrap 4 e Vue Js;
+- Para efetuar requisições para a API foi utlizado a bliblioteca axios.
 
-This repository holds a composer-installable app starter.
-It has been built from the 
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Passos para rodar o projeto
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+- Clonar o projeto;
+- Via CMD, no diretório do projeto rodar o comando ` composer install `;
+- Criar o banco de dados local, no caso, criei com o nome "desafio-om30";
+- Após criar o banco de dados, configurar os dados de conexão do mesmo no arquivo `app\Config\Database.php`, no array $default;
+- Para rodar a(s) migrate(s), é necessário rodar o comando no diretório do projeto: `php spark migrate`;
+- Após a migrate executada, é necessário iniciar a aplicação e testar, por meio do comando `php spark serve`, por padrão irá rodar em `http:localhost:8080`, caso queira trocar a porta, adicione ao comando o seguinte parâmetro: `--port=8003`, sendo a porta 8003 um exemplo, pois poderá colocar a porta que desejar.
 
-The user guide corresponding to this version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/). 
+## O que faltou
 
-## Installation & updates
+O projeto se encontra incompleto, porém, funciona todo o CRUD, portanto, segue a lista dos itens que estava em mente de ainda finalizar:
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
-
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
-
-## Setup
-
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
-
-## Important Change with index.php
-
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-The user guide updating and deployment is a bit awkward at the moment, but we are working on it!
-
-## Repository Management
-
-We use Github issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script. 
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 7.2 or higher is required, with the following extensions installed: 
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-- xml (enabled by default - don't turn it off)
+- Upload de foto do paciente, assim como a remoção da mesma;
+- Validação dos atributos no frontend (atualmente só possue na API);
+- Autenticação via token;
+- Utilização da bibliota Sweet Alert para exibição dos alertas, ao invés do alert nativo do javascript.

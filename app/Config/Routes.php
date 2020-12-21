@@ -31,7 +31,13 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->resource('pacientes', ['except' => 'new,edit']);
+$routes->get('/novo-paciente', 'Home::novoPaciente');
+$routes->get('/editar-paciente/(:num)', 'Home::editarPaciente/$1');
+
+$routes->group('api', function($routes)
+{
+	$routes->resource('pacientes', ['except' => 'new,edit']);
+});
 
 /**
  * --------------------------------------------------------------------
